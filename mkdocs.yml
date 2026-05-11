@@ -1,6 +1,6 @@
 site_name: Spring Boot 4 — Follow-Along
 site_description: Comprehensive, beginner-friendly Spring Boot 4 documentation built only from SB4 idioms.
-site_url: https://prkprime.dev/Spring-Boot-4-Docs-LLM-generated/
+site_url: https://sb4.prkprime.dev/
 repo_url: https://github.com/prkprime/Spring-Boot-4-Docs-LLM-generated
 edit_uri: edit/main/docs/
 strict: true
