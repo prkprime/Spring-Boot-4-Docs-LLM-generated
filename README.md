@@ -1,5 +1,9 @@
 # Spring Boot 4 Follow-Along
 
+> **Disclosure**
+>
+> This repository was generated and reviewed with AI assistance from Claude Opus 4.7 and Codex GPT-5.5, using roughly USD 400 of token/API spend. Treat it as a carefully tested learning resource, but still verify important production decisions against the official Spring documentation and your own application constraints.
+
 This repository is a Spring Boot 4 documentation site plus runnable chapter code. It is written as a backend-only, follow-along guide for people who know Java basics and HTTP basics, but want current Spring Boot 4 / Spring Framework 7 examples instead of upgraded Spring Boot 2 or 3 material.
 
 The docs are built with MkDocs Material. Every code chapter lives under `code/<chapter>/maven`, and the docs include source snippets directly from those projects so the guide and the tested code stay aligned.

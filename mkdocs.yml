@@ -4,6 +4,7 @@ site_url: https://example.invalid/spring-boot-4-docs/
 repo_url: https://github.com/REPLACE_OWNER/spring-boot-4-docs
 edit_uri: edit/main/docs/
 strict: true
+copyright: Generated and reviewed with Claude Opus 4.7 and Codex GPT-5.5; roughly USD 400 of token/API spend.
 
 theme:
   name: material
