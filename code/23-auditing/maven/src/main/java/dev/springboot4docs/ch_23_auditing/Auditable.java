@@ -11,8 +11,11 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import lombok.Getter;
+
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
+@Getter
 abstract class Auditable {
 
 	@CreatedDate
@@ -26,21 +29,5 @@ abstract class Auditable {
 
 	@LastModifiedBy
 	private String updatedBy;
-
-	public Instant getCreatedAt() {
-		return this.createdAt;
-	}
-
-	public Instant getUpdatedAt() {
-		return this.updatedAt;
-	}
-
-	public String getCreatedBy() {
-		return this.createdBy;
-	}
-
-	public String getUpdatedBy() {
-		return this.updatedBy;
-	}
 
 }

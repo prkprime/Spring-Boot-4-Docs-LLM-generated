@@ -75,7 +75,7 @@ void prePersist() {
 
 `@PrePersist` runs before the entity is first inserted. That keeps clients from choosing their own creation time. Chapter 23 replaces this manual callback with Spring Data auditing, which is the better fit once more entities need `createdAt`, `updatedAt`, or `createdBy`.
 
-One more entity detail is easy to miss: setters do not mean every field should be changed by every caller. JPA needs a way to populate state, and frameworks often expect JavaBean-style accessors. Your application still owns the rules. In this chapter the controller never accepts `id` or `createdAt` from the request. The database chooses the id, and the entity callback chooses the creation time.
+One more entity detail is easy to miss: Lombok-generated accessors do not mean every field should be changed by every caller. JPA needs a way to populate state, and frameworks often expect JavaBean-style methods. Your application still owns the rules. In this chapter the controller never accepts `id` or `createdAt` from the request. The database chooses the id, and the entity callback chooses the creation time.
 
 When an entity is loaded inside a transaction, it is managed by the persistence context. Changes to managed entities can be detected and flushed to the database when the transaction commits. This chapter does not add an update endpoint because the first lesson is the repository shape, but that managed-state idea is central to JPA. Later chapters use it when relationships, transactions, and dirty checking become visible.
 

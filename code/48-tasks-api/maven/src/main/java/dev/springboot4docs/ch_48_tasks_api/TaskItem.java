@@ -11,9 +11,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "task_item")
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class TaskItem {
 
 	@Id
@@ -38,9 +43,6 @@ public class TaskItem {
 
 	private Instant completedAt;
 
-	protected TaskItem() {
-	}
-
 	public TaskItem(String ownerSubject, String title, String details) {
 		this.ownerSubject = ownerSubject;
 		this.title = title;
@@ -48,7 +50,7 @@ public class TaskItem {
 	}
 
 	@PrePersist
-	void setCreatedAt() {
+	void prePersist() {
 		if (this.createdAt == null) {
 			this.createdAt = Instant.now();
 		}
@@ -57,34 +59,6 @@ public class TaskItem {
 	public void complete() {
 		this.status = TaskStatus.DONE;
 		this.completedAt = Instant.now();
-	}
-
-	public Long getId() {
-		return this.id;
-	}
-
-	public String getOwnerSubject() {
-		return this.ownerSubject;
-	}
-
-	public String getTitle() {
-		return this.title;
-	}
-
-	public String getDetails() {
-		return this.details;
-	}
-
-	public TaskStatus getStatus() {
-		return this.status;
-	}
-
-	public Instant getCreatedAt() {
-		return this.createdAt;
-	}
-
-	public Instant getCompletedAt() {
-		return this.completedAt;
 	}
 
 }

@@ -7,8 +7,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Getter(AccessLevel.PACKAGE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 class PasskeyChallenge {
 
 	@Id
@@ -31,39 +36,12 @@ class PasskeyChallenge {
 	@Column(nullable = false)
 	private boolean consumed;
 
-	protected PasskeyChallenge() {
-	}
-
 	PasskeyChallenge(String challenge, String username, ChallengePurpose purpose, Instant createdAt, Instant expiresAt) {
 		this.challenge = challenge;
 		this.username = username;
 		this.purpose = purpose;
 		this.createdAt = createdAt;
 		this.expiresAt = expiresAt;
-	}
-
-	String getChallenge() {
-		return this.challenge;
-	}
-
-	String getUsername() {
-		return this.username;
-	}
-
-	ChallengePurpose getPurpose() {
-		return this.purpose;
-	}
-
-	Instant getCreatedAt() {
-		return this.createdAt;
-	}
-
-	Instant getExpiresAt() {
-		return this.expiresAt;
-	}
-
-	boolean isConsumed() {
-		return this.consumed;
 	}
 
 	void consume() {

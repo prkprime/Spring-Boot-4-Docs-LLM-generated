@@ -51,7 +51,7 @@ public void addBook(Book book) {
 }
 ```
 
-Bidirectional relationships are two Java references pointing at one database relationship. JPA does not automatically keep both object references synchronized for you while your code is building the graph. If you only add a book to `author.books` but never set `book.author`, the owning side is still missing the foreign key. If you only set `book.author` but never add it to the collection, the database insert can still work, but the in-memory `Author` object is stale. A small helper method keeps the aggregate consistent.
+Bidirectional relationships are two Java references pointing at one database relationship. JPA does not automatically keep both object references synchronized for you while your code is building the graph. If you only add a book to `author.books` but never set `book.author`, the owning side is still missing the foreign key. If you only set `book.author` but never add it to the collection, the database insert can still work, but the in-memory `Author` object is stale. A small helper method keeps the aggregate consistent. `Book` exposes that setter as package-private with Lombok so callers outside the aggregate do not casually rewire the relationship.
 
 The complete entities are small:
 

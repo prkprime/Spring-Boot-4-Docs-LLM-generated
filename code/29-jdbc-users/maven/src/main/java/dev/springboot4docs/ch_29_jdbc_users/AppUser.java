@@ -7,8 +7,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
+@Getter(AccessLevel.PACKAGE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 class AppUser {
 
 	@Id
@@ -19,6 +25,7 @@ class AppUser {
 	private String username;
 
 	@Column(nullable = false)
+	@Setter(AccessLevel.PACKAGE)
 	private String passwordHash;
 
 	@Column(nullable = false)
@@ -30,41 +37,10 @@ class AppUser {
 	@Column(nullable = false, updatable = false)
 	private Instant createdAt = Instant.now();
 
-	protected AppUser() {
-	}
-
 	AppUser(String username, String passwordHash, String roles) {
 		this.username = username;
 		this.passwordHash = passwordHash;
 		this.roles = roles;
-	}
-
-	Long getId() {
-		return this.id;
-	}
-
-	String getUsername() {
-		return this.username;
-	}
-
-	String getPasswordHash() {
-		return this.passwordHash;
-	}
-
-	void setPasswordHash(String passwordHash) {
-		this.passwordHash = passwordHash;
-	}
-
-	String getRoles() {
-		return this.roles;
-	}
-
-	boolean isEnabled() {
-		return this.enabled;
-	}
-
-	Instant getCreatedAt() {
-		return this.createdAt;
 	}
 
 }

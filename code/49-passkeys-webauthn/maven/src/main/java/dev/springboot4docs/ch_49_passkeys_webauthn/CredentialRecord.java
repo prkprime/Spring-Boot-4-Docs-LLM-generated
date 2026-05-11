@@ -9,8 +9,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Getter(AccessLevel.PACKAGE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 class CredentialRecord {
 
 	@Id
@@ -32,9 +37,6 @@ class CredentialRecord {
 	@Column(nullable = false)
 	private Instant createdAt;
 
-	protected CredentialRecord() {
-	}
-
 	CredentialRecord(PasskeyAccount account, String credentialId, String publicKeyCose, long signCount, Instant createdAt) {
 		this.account = account;
 		this.credentialId = credentialId;
@@ -43,32 +45,8 @@ class CredentialRecord {
 		this.createdAt = createdAt;
 	}
 
-	Long getId() {
-		return this.id;
-	}
-
-	PasskeyAccount getAccount() {
-		return this.account;
-	}
-
-	String getCredentialId() {
-		return this.credentialId;
-	}
-
-	String getPublicKeyCose() {
-		return this.publicKeyCose;
-	}
-
-	long getSignCount() {
-		return this.signCount;
-	}
-
 	void updateSignCount(long signCount) {
 		this.signCount = signCount;
-	}
-
-	Instant getCreatedAt() {
-		return this.createdAt;
 	}
 
 }

@@ -11,9 +11,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "author")
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Author {
 
 	@Id
@@ -25,26 +30,12 @@ public class Author {
 	private String email;
 
 	@OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
+	@Getter(AccessLevel.NONE)
 	private List<Book> books = new ArrayList<>();
-
-	protected Author() {
-	}
 
 	public Author(String name, String email) {
 		this.name = name;
 		this.email = email;
-	}
-
-	public Long getId() {
-		return this.id;
-	}
-
-	public String getName() {
-		return this.name;
-	}
-
-	public String getEmail() {
-		return this.email;
 	}
 
 	public List<Book> getBooks() {

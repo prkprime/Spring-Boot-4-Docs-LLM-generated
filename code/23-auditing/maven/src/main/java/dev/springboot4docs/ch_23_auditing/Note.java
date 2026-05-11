@@ -5,9 +5,14 @@ import org.hibernate.annotations.SoftDelete;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @SoftDelete
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 class Note extends Auditable {
 
 	@Id
@@ -16,19 +21,8 @@ class Note extends Auditable {
 
 	private String body;
 
-	protected Note() {
-	}
-
 	Note(String body) {
 		this.body = body;
-	}
-
-	public Long getId() {
-		return this.id;
-	}
-
-	public String getBody() {
-		return this.body;
 	}
 
 	public void updateBody(String body) {

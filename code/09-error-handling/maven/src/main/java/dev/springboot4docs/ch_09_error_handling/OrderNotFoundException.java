@@ -1,5 +1,8 @@
 package dev.springboot4docs.ch_09_error_handling;
 
+import lombok.Getter;
+
+@Getter
 public class OrderNotFoundException extends RuntimeException {
 
 	private final long orderId;
@@ -7,10 +10,6 @@ public class OrderNotFoundException extends RuntimeException {
 	public OrderNotFoundException(long orderId) {
 		super("Order " + orderId + " was not found");
 		this.orderId = orderId;
-	}
-
-	public long getOrderId() {
-		return this.orderId;
 	}
 
 }

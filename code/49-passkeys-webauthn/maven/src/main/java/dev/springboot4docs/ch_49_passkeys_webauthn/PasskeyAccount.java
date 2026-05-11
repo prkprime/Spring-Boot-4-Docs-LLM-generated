@@ -7,8 +7,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Getter(AccessLevel.PACKAGE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 class PasskeyAccount {
 
 	@Id
@@ -27,34 +32,11 @@ class PasskeyAccount {
 	@Column(nullable = false)
 	private Instant createdAt;
 
-	protected PasskeyAccount() {
-	}
-
 	PasskeyAccount(String username, String displayName, String userHandle, Instant createdAt) {
 		this.username = username;
 		this.displayName = displayName;
 		this.userHandle = userHandle;
 		this.createdAt = createdAt;
-	}
-
-	Long getId() {
-		return this.id;
-	}
-
-	String getUsername() {
-		return this.username;
-	}
-
-	String getDisplayName() {
-		return this.displayName;
-	}
-
-	String getUserHandle() {
-		return this.userHandle;
-	}
-
-	Instant getCreatedAt() {
-		return this.createdAt;
 	}
 
 }

@@ -8,9 +8,15 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "book")
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Book {
 
 	@Id
@@ -23,34 +29,12 @@ public class Book {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "author_id", nullable = false)
+	@Setter(AccessLevel.PACKAGE)
 	private Author author;
-
-	protected Book() {
-	}
 
 	public Book(String title, Integer publicationYear) {
 		this.title = title;
 		this.publicationYear = publicationYear;
-	}
-
-	public Long getId() {
-		return this.id;
-	}
-
-	public String getTitle() {
-		return this.title;
-	}
-
-	public Integer getPublicationYear() {
-		return this.publicationYear;
-	}
-
-	public Author getAuthor() {
-		return this.author;
-	}
-
-	void setAuthor(Author author) {
-		this.author = author;
 	}
 
 }

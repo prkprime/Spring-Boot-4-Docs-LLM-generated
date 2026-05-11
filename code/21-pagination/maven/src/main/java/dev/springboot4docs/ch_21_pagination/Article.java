@@ -6,8 +6,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Article {
 
 	@Id
@@ -20,29 +25,10 @@ public class Article {
 
 	private Instant publishedAt;
 
-	protected Article() {
-	}
-
 	public Article(String title, String body, Instant publishedAt) {
 		this.title = title;
 		this.body = body;
 		this.publishedAt = publishedAt;
-	}
-
-	public Long getId() {
-		return this.id;
-	}
-
-	public String getTitle() {
-		return this.title;
-	}
-
-	public String getBody() {
-		return this.body;
-	}
-
-	public Instant getPublishedAt() {
-		return this.publishedAt;
 	}
 
 }

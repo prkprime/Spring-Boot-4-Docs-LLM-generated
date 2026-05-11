@@ -8,8 +8,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Customer {
 
 	@Id
@@ -22,30 +27,15 @@ public class Customer {
 	@Column(nullable = false)
 	private Instant createdAt;
 
-	protected Customer() {
-	}
-
 	public Customer(String email) {
 		this.email = email;
 	}
 
 	@PrePersist
-	void setCreatedAt() {
+	void prePersist() {
 		if (this.createdAt == null) {
 			this.createdAt = Instant.now();
 		}
-	}
-
-	public Long getId() {
-		return this.id;
-	}
-
-	public String getEmail() {
-		return this.email;
-	}
-
-	public Instant getCreatedAt() {
-		return this.createdAt;
 	}
 
 }
