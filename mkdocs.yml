@@ -1,7 +1,7 @@
 site_name: Spring Boot 4 — Follow-Along
 site_description: Comprehensive, beginner-friendly Spring Boot 4 documentation built only from SB4 idioms.
-site_url: https://example.invalid/spring-boot-4-docs/
-repo_url: https://github.com/REPLACE_OWNER/spring-boot-4-docs
+site_url: https://prkprime.github.io/Spring-Boot-4-Docs-LLM-generated/
+repo_url: https://github.com/prkprime/Spring-Boot-4-Docs-LLM-generated
 edit_uri: edit/main/docs/
 strict: true
 copyright: Generated and reviewed with Claude Opus 4.7 and Codex GPT-5.5; roughly USD 400 of token/API spend.
