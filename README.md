@@ -90,6 +90,10 @@ To publish the docs from GitHub:
 
 Update `site_url` and `repo_url` in `mkdocs.yml` after the final GitHub repository URL is known.
 
+## License
+
+This project is released under the MIT License. See [LICENSE](LICENSE).
+
 ## Contributor Notes
 
 - Keep examples Spring Boot 4 only. Prefer `spring-boot-starter-webmvc` and `spring-boot-starter-webmvc-test` for servlet MVC chapters.
