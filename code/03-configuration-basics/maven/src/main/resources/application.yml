@@ -1,0 +1,4 @@
+greeting:
+  prefix: "Hello"
+  audience: "Spring Boot 4"
+  punctuation: "!"

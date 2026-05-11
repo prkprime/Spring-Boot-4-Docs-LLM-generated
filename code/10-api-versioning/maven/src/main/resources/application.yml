@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: 10-api-versioning
+  mvc:
+    apiversion:
+      use:
+        header: X-API-Version
+        # Alternative strategies are exclusive. Configure one of these instead:
+        # path-segment: 0
+        # media-type-parameter:
+        #   application/vnd.example+json: v
+        # query-parameter: version
+      supported: 1,2
+      default: 1

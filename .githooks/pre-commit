@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="$(git rev-parse --show-toplevel)"
+cd "${ROOT}"
+
+staged="$(git diff --cached --name-only)"
+
+if grep -Eq '(^site/|/target/|^\.venv/|^\.m2/)' <<< "${staged}"; then
+  echo "ERROR: generated output or local cache is staged." >&2
+  exit 1
+fi
+
+if grep -Eq '^(docs/|code/|scripts/|mkdocs\.yml|requirements-docs\.txt|\.github/workflows/)' <<< "${staged}"; then
+  python3 scripts/check-render.py --build
+fi
+
+legacy="$(rg -n 'TODO|FIXME|4\.0\.6\.RELEASE|both Maven and Gradle' docs code scripts mkdocs.yml .github README.md CLAUDE.md --glob '!**/target/**' || true)"
+if [[ -n "${legacy}" ]]; then
+  echo "${legacy}" >&2
+  echo "ERROR: stale marker scan failed." >&2
+  exit 1
+fi
+
+fence_attrs="$(rg -n '^```[A-Za-z0-9_+.#-]+.*(hl_lines|linenums)' docs || true)"
+if [[ -n "${fence_attrs}" ]]; then
+  echo "${fence_attrs}" >&2
+  echo "ERROR: do not add blanket per-fence hl_lines/linenums annotations." >&2
+  exit 1
+fi

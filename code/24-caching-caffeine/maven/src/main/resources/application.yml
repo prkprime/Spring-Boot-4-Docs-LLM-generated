@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: 24-caching-caffeine
+  cache:
+    type: caffeine

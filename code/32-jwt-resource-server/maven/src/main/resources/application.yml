@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: 32-jwt-resource-server
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          # Real config: point at IdP's JWKS endpoint.
+          # For tests we use Spring Security's jwt() request post-processor.
+          jwk-set-uri: https://idp.example.invalid/.well-known/jwks.json

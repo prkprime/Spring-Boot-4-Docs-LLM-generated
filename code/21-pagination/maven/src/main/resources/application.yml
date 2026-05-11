@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: 21-pagination
+  data:
+    web:
+      pageable:
+        max-page-size: 100

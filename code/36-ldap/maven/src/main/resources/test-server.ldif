@@ -1,0 +1,40 @@
+dn: dc=springboot4docs,dc=dev
+objectClass: top
+objectClass: domain
+dc: springboot4docs
+
+dn: ou=people,dc=springboot4docs,dc=dev
+objectClass: top
+objectClass: organizationalUnit
+ou: people
+
+dn: uid=alice,ou=people,dc=springboot4docs,dc=dev
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+cn: Alice Admin
+sn: Admin
+uid: alice
+userPassword: secret
+
+dn: uid=bob,ou=people,dc=springboot4docs,dc=dev
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+cn: Bob User
+sn: User
+uid: bob
+userPassword: secret
+
+dn: ou=groups,dc=springboot4docs,dc=dev
+objectClass: top
+objectClass: organizationalUnit
+ou: groups
+
+dn: cn=admins,ou=groups,dc=springboot4docs,dc=dev
+objectClass: top
+objectClass: groupOfNames
+cn: admins
+member: uid=alice,ou=people,dc=springboot4docs,dc=dev

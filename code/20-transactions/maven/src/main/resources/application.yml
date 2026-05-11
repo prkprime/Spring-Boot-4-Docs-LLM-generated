@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: 20-transactions
+  jpa:
+    open-in-view: false

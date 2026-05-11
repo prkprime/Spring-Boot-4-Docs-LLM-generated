@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: 39-actuator
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,env,loggers,prometheus,beans,configprops,mappings,httpexchanges,threaddump,heapdump,startup,scheduledtasks,caches
+  endpoint:
+    health:
+      show-details: when-authorized
+      probes:
+        enabled: true
+  info:
+    env:
+      enabled: true
+    git:
+      mode: full
+
+info:
+  app:
+    name: ${spring.application.name:demo}
+    version: 0.0.1

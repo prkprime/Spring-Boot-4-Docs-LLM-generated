@@ -1,0 +1,3 @@
+spring:
+  application:
+    name: 33-jwt-local-issuer

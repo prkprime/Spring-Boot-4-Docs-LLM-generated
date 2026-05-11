@@ -1,0 +1,24 @@
+server:
+  port: 0
+
+spring:
+  profiles:
+    group:
+      local: dev,debug
+
+app:
+  name: Profiles Config
+  greeting: Hello from the base configuration
+  version: 1.0.0
+  secret-api-key: ${SECRET_API_KEY:default-key}
+  database-url: jdbc:h2:mem:profiles-config
+
+---
+spring:
+  config:
+    activate:
+      on-profile: debug
+
+logging:
+  level:
+    dev.springboot4docs.ch_37_profiles_config: DEBUG

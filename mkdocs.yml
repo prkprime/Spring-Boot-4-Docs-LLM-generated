@@ -1,0 +1,154 @@
+site_name: Spring Boot 4 — Follow-Along
+site_description: Comprehensive, beginner-friendly Spring Boot 4 documentation built only from SB4 idioms.
+site_url: https://example.invalid/spring-boot-4-docs/
+repo_url: https://github.com/REPLACE_OWNER/spring-boot-4-docs
+edit_uri: edit/main/docs/
+strict: true
+
+theme:
+  name: material
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - toc.follow
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+    - search.suggest
+    - search.highlight
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: green
+      accent: green
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: green
+      accent: light green
+      toggle:
+        icon: material/weather-night
+        name: Switch to light mode
+  icon:
+    repo: fontawesome/brands/github
+    edit: material/pencil
+    view: material/eye
+
+plugins:
+  - search
+  - include-markdown
+  - glightbox
+  # Re-enable once the repo is initialized with git:
+  # - git-revision-date-localized:
+  #     type: timeago
+  #     enable_creation_date: true
+  #     fallback_to_build_date: true
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets:
+      check_paths: true
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.caret
+
+extra:
+  generator: false
+  spring_boot_version: "4.0.6"
+  java_version: "25"
+
+nav:
+  - Home: index.md
+  - Part I — Foundations:
+      - 01-foundations/index.md
+      - "1. Hello World": 01-foundations/01-hello-world.md
+      - "2. Dev Loop": 01-foundations/02-dev-loop.md
+      - "3. Configuration Basics": 01-foundations/03-configuration-basics.md
+      - "4. SB4 + SF7: What Changed": 01-foundations/04-sb4-sf7-whats-new.md
+      - "5. Your First Test": 01-foundations/05-your-first-test.md
+  - Part II — Web layer (MVC):
+      - 02-web/index.md
+      - "6. REST Controllers": 02-web/06-rest-controllers.md
+      - "7. JSON with Jackson 3": 02-web/07-json-jackson.md
+      - "8. Bean Validation 3.1": 02-web/08-bean-validation.md
+      - "9. Error Handling + ProblemDetail": 02-web/09-error-handling.md
+      - "10. API Versioning (NEW)": 02-web/10-api-versioning.md
+      - "11. HTTP Service Clients (NEW)": 02-web/11-http-service-clients.md
+      - "12. Filters & Interceptors": 02-web/12-filters-interceptors.md
+      - "13. CORS": 02-web/13-cors.md
+      - "14. File Upload & Download": 02-web/14-file-io.md
+      - "15. Async + SSE + Virtual Threads": 02-web/15-async-sse-virtual-threads.md
+      - "16. OpenAPI Documentation": 02-web/16-openapi.md
+  - Part III — Data:
+      - 03-data/index.md
+      - "17. Spring Data JPA Basics": 03-data/17-jpa-basics.md
+      - "18. Postgres + Testcontainers + Flyway": 03-data/18-postgres-testcontainers.md
+      - "19. Relationships & N+1": 03-data/19-relationships.md
+      - "20. Transactions": 03-data/20-transactions.md
+      - "21. Pagination & Sorting": 03-data/21-pagination.md
+      - "22. Specifications": 03-data/22-specifications.md
+      - "23. Auditing & Soft Deletes": 03-data/23-auditing.md
+      - "24. Caching with Caffeine": 03-data/24-caching-caffeine.md
+      - "25. Caching with Redis": 03-data/25-caching-redis.md
+  - Part IV — Security ladder:
+      - 04-security/index.md
+      - "26. Spring Security 7 Fundamentals": 04-security/26-fundamentals.md
+      - "27. HTTP Basic + In-Memory Users": 04-security/27-http-basic.md
+      - "28. Form Login + Sessions": 04-security/28-form-login.md
+      - "29. JDBC Users + Password Encoders": 04-security/29-jdbc-users.md
+      - "30. Method Security": 04-security/30-method-security.md
+      - "31. CSRF, Headers, CORS-Security": 04-security/31-csrf-headers.md
+      - "32. JWT Resource Server": 04-security/32-jwt-resource-server.md
+      - "33. JWT Local Demo Issuer": 04-security/33-jwt-local-issuer.md
+      - "34. OAuth2 Login": 04-security/34-oauth2-login.md
+      - "35. OAuth2 Resource Server (Keycloak)": 04-security/35-oauth2-keycloak.md
+      - "36. LDAP Authentication": 04-security/36-ldap.md
+  - Part V — Production-ready:
+      - 05-production/index.md
+      - "37. Profiles & Externalized Config": 05-production/37-profiles-config.md
+      - "38. Logging — Structured JSON": 05-production/38-logging.md
+      - "39. Actuator": 05-production/39-actuator.md
+      - "40. Observability — Metrics & Traces": 05-production/40-observability.md
+      - "41. Graceful Shutdown": 05-production/41-graceful-shutdown.md
+      - "42. Testing II — Slice Tests": 05-production/42-testing-slices.md
+      - "43. Testing III — Testcontainers": 05-production/43-testing-testcontainers.md
+      - "44. Virtual Threads in Depth": 05-production/44-virtual-threads.md
+      - "45. Docker": 05-production/45-docker.md
+      - "46. CI — GitHub Actions": 05-production/46-ci-github-actions.md
+      - "47. CD — Fly.io": 05-production/47-cd-flyio.md
+  - Part VI — Capstone:
+      - 06-capstone/index.md
+      - "48. Tasks API": 06-capstone/48-tasks-api.md
+  - Part VII — Mini-projects:
+      - 07-mini-projects/index.md
+      - "49. Passkeys / WebAuthn": 07-mini-projects/49-passkeys-webauthn.md
+  - Appendices:
+      - "A. WebFlux": appendix/webflux.md
+      - "B. GraalVM Native Image": appendix/native.md
+      - "C. Kubernetes Primer": appendix/k8s.md
+      - "D. Spring Boot 3 To 4 Migration": appendix/sb3-to-sb4-migration.md
+      - "E. Programmatic Bean Registration": appendix/programmatic-beans.md

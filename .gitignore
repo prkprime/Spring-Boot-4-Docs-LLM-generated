@@ -1,0 +1,36 @@
+# Python / MkDocs
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+site/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Java/Gradle/Maven build outputs
+**/target/
+**/build/
+**/.gradle/
+**/out/
+.m2/
+**/HELP.md
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Local env / secrets
+.env
+.env.*
+!.env.example
+
+# Temporary files
+*.tmp
+*.bak
+*.swp

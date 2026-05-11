@@ -1,0 +1,12 @@
+what i need is a comprehensive, in deapth, with code snippets and line hiiting, docs for spring boot 4, that only use spring boot 4
+online guides are made for older versions and edited only the updated parts. same with video course. i need latest only docs.
+
+fastapi has a good documentation written with MKDocs with material for mkdocs theme, just like that
+
+this guide should be follow along with type of guide where every step, every line is explained for the beginer in the spring. assume basic knowledge of get and post and json and heade, and decenet knowledge of java basics.
+
+this guide shpuld go from basic hello world to production ready, app, any example that covers everythng from endpoints, middlewares, caching, security (username password to oauth, ldap, passkeys even if possible)
+
+this is going to be pure backend, and swagger ui will be used to fire requests, or to check if session is persitesd or not, simple junits to test the outputs like printing and all. no frontend no ui. stateless or state managed, u decide.
+
+guide should go so step by step with each new concept on new subpage, also in temporary subdirectoy, you are also writing that code and testing it. do multiple iterations for each topic with best practices and all, each doc piece has to be reviewd by codex via mcp. make plan first with topics and subtopics and then we will go into impl. review the plan from codex also
