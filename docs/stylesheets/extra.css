@@ -64,6 +64,11 @@
   transition: var(--transition-smooth);
 }
 
+/* Prevent double padding when .md-nav__link is nested inside .md-nav__container */
+.md-nav__container a.md-nav__link {
+  padding: 0 !important;
+}
+
 .md-nav__link:hover {
   background-color: rgba(20, 184, 166, 0.08);
   color: var(--md-primary-fg-color) !important;
