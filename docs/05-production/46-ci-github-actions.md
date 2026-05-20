@@ -15,19 +15,32 @@ The chapter's sample application is intentionally plain:
 
 The CI lesson is not in this app's controller code. It is in the repository-level workflows that run every app's tests.
 
-## Docs Workflow
+## CI/CD Pipeline Workflow
 
-The docs workflow builds MkDocs and deploys the site from `main`:
+The repository uses a unified GitHub Actions pipeline to run all code verification checks and build the documentation site in a single workflow. Deployment to GitHub Pages only occurs when the verification job succeeds on `main`:
 
 ```yaml
-{% include-markdown "../../.github/workflows/docs.yml" comments=false %}
+{% include-markdown "../../.github/workflows/pipeline.yml" comments=false %}
 ```
 
-The trigger is path-scoped. Changes under `docs/**`, `mkdocs.yml`, `.github/workflows/docs.yml`, or `code/**` run the workflow. `code/**` matters because chapter pages include snippets from real source files. A Java change can break a docs page even when no Markdown file changes.
+The trigger is path-scoped and executes on any push or pull request. The workflow does two main tasks:
 
-The workflow checks out full history because the git revision date plugin needs repository metadata when it is enabled. In this local workspace that plugin is commented out until the repo is initialized correctly, but CI is already shaped for the final repository.
+1. **Verify Code and Build Docs (`verify`)**:
+   - Sets up JDK 25 with Maven caching.
+   - Sets up Gradle with caching via `gradle/actions/setup-gradle@v4`.
+   - Sets up Python 3.13 with pip cache for MkDocs.
+   - Installs documentation dependencies and executes `scripts/verify-all.sh`.
+   - Compiles the documentation site and checks for broken links.
+   - Loops through all 48 code chapters to run Spotless, parity checks, and test suites.
+   - Uploads the compiled `site` artifact if the branch is `main`.
 
-The build step runs:
+2. **Deploy Docs to Pages (`deploy`)**:
+   - Runs only on pushes or manual dispatches to the `main` branch.
+   - Deploys the built `site` artifact to GitHub Pages via `actions/deploy-pages`.
+
+This guarantees that the site is **never** deployed if any code sample fails compilation or testing, or if there is a broken markdown link.
+
+The verification step runs:
 
 ```bash
 python scripts/check-render.py --build
@@ -36,39 +49,6 @@ python scripts/check-render.py --build
 That script calls `mkdocs build --strict` and then scans the generated HTML. It catches a class of mistakes that a normal Markdown build can miss: raw include directives leaking into the page, included code failing to render as code, or Java source accidentally becoming paragraph text.
 
 CI should fail on broken docs. A tutorial site is product code. If a page links to a missing chapter or renders source code as prose, the reader experiences it as a bug.
-
-## Code Workflow
-
-The code workflow discovers every chapter and runs its tests:
-
-```yaml
-{% include-markdown "../../.github/workflows/code.yml" comments=false %}
-```
-
-The `discover` job emits a JSON matrix of chapter slugs. It looks for directories under `code/` that contain `maven/`. That keeps the workflow from hard-coding the chapter list. When chapter 48 is added later, CI picks it up automatically.
-
-The `build` job runs with a matrix:
-
-```yaml
-strategy:
-  fail-fast: false
-  matrix:
-    chapter: ${{ fromJson(needs.discover.outputs.chapters) }}
-```
-
-`fail-fast: false` is important for a docs project with many independent samples. If chapter 18 fails, you still want to know whether chapter 25 and chapter 43 fail too. Otherwise you fix one problem, push again, and discover the next failure later.
-
-Each matrix leg sets up Java 25:
-
-```yaml
-- uses: actions/setup-java@v4
-  with:
-    distribution: temurin
-    java-version: "25"
-    cache: maven
-```
-
-That matches the course recommendation. Spring Boot 4 can run on Java 17+, but this guide's code targets Java 25 so readers learn the current LTS path.
 
 ## Reusing Local Scripts
 
@@ -117,13 +97,13 @@ A practical pull request pipeline should separate three questions:
 2. Do the code samples test?
 3. If this lands on `main`, should it deploy?
 
-The workflows here answer the first two questions on pull requests. Deployment is reserved for pushes to `main` in the docs workflow. Chapter 47 applies the same idea to application deployment.
+The unified pipeline answers the first two questions on pull requests (running the `verify` job). Deployment is reserved for pushes to `main` in the `deploy` job. Chapter 47 applies the same idea to application deployment.
 
-For a real repository, add branch protection so `main` requires the docs workflow and code workflow to pass before merge. Without that rule, CI becomes advisory. With that rule, the repository refuses to accept broken docs or broken samples.
+For a real repository, add branch protection so `main` requires the `pipeline` workflow to pass before merge. Without that rule, CI becomes advisory. With that rule, the repository refuses to accept broken docs or broken samples.
 
 ## Caching
 
-The code workflow enables Maven caching through `actions/setup-java`. The docs workflow enables pip caching through `actions/setup-python`. Caches reduce repeated dependency downloads, but they are an optimization. The build should still work from an empty cache.
+The pipeline enables Maven caching through `actions/setup-java`, Gradle caching through `gradle/actions/setup-gradle`, and pip caching through `actions/setup-python`. Caches reduce repeated dependency downloads, but they are an optimization. The build should still work from an empty cache.
 
 Do not store build outputs such as `target/` in the repository to make CI faster. Let the build produce them. Commit source, configuration, scripts, and tests. Generate outputs in CI.
 
