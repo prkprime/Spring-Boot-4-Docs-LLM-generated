@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: 16-openapi
+
+springdoc:
+  swagger-ui:
+    path: /swagger

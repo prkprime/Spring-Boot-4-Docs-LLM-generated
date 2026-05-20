@@ -174,17 +174,29 @@ The generated application test remains the basic context-load check:
 
 Run the chapter tests from the Maven project:
 
-```bash
-./mvnw -q -B test
-```
+=== "Maven"
+    ```bash
+    ./mvnw test
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew test
+    ```
 
 ## Try It
 
 Start the application:
 
-```bash
-./mvnw spring-boot:run
-```
+=== "Maven"
+    ```bash
+    ./mvnw spring-boot:run
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew bootRun
+    ```
 
 Call the async JSON endpoint:
 

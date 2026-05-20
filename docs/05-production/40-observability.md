@@ -132,9 +132,15 @@ The JSON actuator test calls `/actuator/metrics/orders.processed.total` and chec
 
 Run the chapter from its Maven directory:
 
-```bash
-./mvnw -q -B test
-```
+=== "Maven"
+    ```bash
+    ./mvnw test
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew test
+    ```
 
 ## Production Notes
 

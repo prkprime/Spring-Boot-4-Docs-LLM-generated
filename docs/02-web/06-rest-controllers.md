@@ -257,10 +257,17 @@ The delete test first sends `DELETE /books/1`, verifies `204 No Content`, and th
 
 Start the application from the chapter directory:
 
-```bash
-cd code/06-rest-controllers/maven
-./mvnw spring-boot:run
-```
+=== "Maven"
+    ```bash
+    cd code/06-rest-controllers/maven
+    ./mvnw spring-boot:run
+    ```
+
+=== "Gradle"
+    ```bash
+    cd code/06-rest-controllers/gradle
+    ./gradlew bootRun
+    ```
 
 Create a book:
 
@@ -306,8 +313,14 @@ curl -i -X DELETE http://localhost:8080/books/1
 
 Run the tests:
 
-```bash
-./mvnw -q -B test
-```
+=== "Maven"
+    ```bash
+    ./mvnw test
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew test
+    ```
 
 The important controller vocabulary is now in place: mapping annotations choose the HTTP verb and path, `@PathVariable` reads path segments, `@RequestParam` reads query parameters, `@RequestBody` reads JSON, and `ResponseEntity` controls status codes and headers. Chapter 7 keeps the same HTTP foundation and looks more closely at the JSON layer underneath it.

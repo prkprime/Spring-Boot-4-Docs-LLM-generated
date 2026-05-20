@@ -1,0 +1,10 @@
+app:
+  name: Profiles Config Service
+  greeting: Hello from production
+  version: 1.0.0
+  database-url: ${DB_URL}
+
+logging:
+  level:
+    root: WARN
+    dev.springboot4docs.ch_37_profiles_config: INFO

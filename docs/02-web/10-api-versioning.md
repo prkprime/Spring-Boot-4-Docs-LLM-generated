@@ -113,9 +113,15 @@ The last test sends `X-API-Version: 99`. It asserts a non-success status rather 
 
 Run the chapter tests from the Maven project:
 
-```bash
-./mvnw -q -B test
-```
+=== "Maven"
+    ```bash
+    ./mvnw test
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew test
+    ```
 
 This project also configures Surefire to run Mockito as a Java agent, matching the earlier Mockito-based chapters. That keeps `@MockitoBean` working on newer JDKs where Mockito cannot rely on self-attachment.
 
@@ -140,9 +146,15 @@ A common production pattern is to log the selected API version for every request
 
 Start the application:
 
-```bash
-./mvnw spring-boot:run
-```
+=== "Maven"
+    ```bash
+    ./mvnw spring-boot:run
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew bootRun
+    ```
 
 Ask for version 1:
 

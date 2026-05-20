@@ -209,9 +209,15 @@ This test is deliberately close to the production contract: `prod` expects the e
 
 Run the chapter from its Maven directory:
 
-```bash
-./mvnw -q -B test
-```
+=== "Maven"
+    ```bash
+    ./mvnw test
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew test
+    ```
 
 The important result is not just that the context loads. The tests prove that two different profiles produce two different runtime configurations from the same application code.
 

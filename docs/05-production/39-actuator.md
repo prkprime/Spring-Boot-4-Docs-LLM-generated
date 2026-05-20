@@ -152,9 +152,15 @@ The logger test inspects `/actuator/loggers/ROOT` and verifies that the response
 
 Run the chapter from its Maven directory:
 
-```bash
-./mvnw -q -B test
-```
+=== "Maven"
+    ```bash
+    ./mvnw test
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew test
+    ```
 
 ## What To Keep
 

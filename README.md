@@ -6,12 +6,12 @@
 
 This repository is a Spring Boot 4 documentation site plus runnable chapter code. It is written as a backend-only, follow-along guide for people who know Java basics and HTTP basics, but want current Spring Boot 4 / Spring Framework 7 examples instead of upgraded Spring Boot 2 or 3 material.
 
-The docs are built with MkDocs Material. Every code chapter lives under `code/<chapter>/maven`, and the docs include source snippets directly from those projects so the guide and the tested code stay aligned.
+The docs are built with MkDocs Material. Every code chapter lives under both `code/<chapter>/maven` and `code/<chapter>/gradle`, and the docs include source snippets directly from those projects so the guide and the tested code stay aligned.
 
 ## Contents
 
 - `docs/` - MkDocs pages, organized from Hello World through web, data, security, production, capstone, mini-projects, and appendices.
-- `code/` - standalone Maven Spring Boot 4 projects for each runnable chapter.
+- `code/` - standalone Maven and Gradle Spring Boot 4 projects for each runnable chapter.
 - `scripts/verify-chapter.sh` - runs the tests for one chapter.
 - `scripts/check-render.py` - strict MkDocs build plus rendered-snippet checks.
 - `scripts/verify-all.sh` - full local verification for docs and all chapter projects.
@@ -24,7 +24,7 @@ The docs are built with MkDocs Material. Every code chapter lives under `code/<c
 - Python 3.13 or a compatible Python 3.x runtime for MkDocs.
 - Bash-compatible shell.
 
-The code samples currently use Maven projects. Gradle generation is intentionally disabled until the upstream Initializr Gradle issue noted in `scripts/new-chapter.sh` is resolved.
+The code samples support Maven and Gradle. Gradle environments are generated locally using automated transition scripts to maintain complete build parity.
 
 ## Local Setup
 
@@ -79,7 +79,7 @@ Some chapters start PostgreSQL, Redis, Keycloak, LDAP, or other containers throu
 
 The repository includes two GitHub Actions workflows:
 
-- `code` discovers every chapter under `code/*/maven` and runs the chapter verifier as a matrix.
+- `code` discovers every chapter under `code/*` and runs the chapter verifier for Maven and Gradle as a matrix.
 - `docs` installs the pinned MkDocs stack, runs the strict render check, uploads the `site/` artifact, and deploys to GitHub Pages on pushes to `main`.
 
 To publish the docs from GitHub:
@@ -98,6 +98,7 @@ This project is released under the MIT License. See [LICENSE](LICENSE).
 
 - Keep examples Spring Boot 4 only. Prefer `spring-boot-starter-webmvc` and `spring-boot-starter-webmvc-test` for servlet MVC chapters.
 - Use Jakarta imports, not `javax.*`.
+- Code formatting follows IntelliJ IDEA defaults (4-space indent for Java/XML, 2-space for YAML/Markdown/JSON), enforced by Spotless (`spotless:apply` / `spotlessApply`).
 - Use `@MockitoBean` instead of deprecated `@MockBean` examples.
 - Keep generated files out of Git: `site/`, `.venv/`, Maven `target/`, Gradle `build/`, and local caches are ignored.
 - When changing a chapter, run that chapter verifier and the docs render check before committing.

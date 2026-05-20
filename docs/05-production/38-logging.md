@@ -79,9 +79,15 @@ This is a demo service, not a design pattern. Real code should log at the level 
 
 Start the app from the chapter directory and call the endpoint with a request ID:
 
-```bash
-./mvnw spring-boot:run
-```
+=== "Maven"
+    ```bash
+    ./mvnw spring-boot:run
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew bootRun
+    ```
 
 ```bash
 curl -i \
@@ -159,9 +165,15 @@ The `POST` changes the package logger to `WARN`. The following `GET` verifies bo
 
 Run the chapter from its Maven directory:
 
-```bash
-./mvnw -q -B test
-```
+=== "Maven"
+    ```bash
+    ./mvnw test
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew test
+    ```
 
 ## What To Keep
 

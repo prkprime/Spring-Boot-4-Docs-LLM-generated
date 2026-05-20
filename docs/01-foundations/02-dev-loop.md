@@ -44,33 +44,30 @@ The exact value changes on every request because the controller calls `Instant.n
 
 This project already includes Spring Boot DevTools:
 
-```xml
-{% include-markdown "../../code/02-dev-loop/maven/pom.xml" start="<!-- docs:devtools:start -->" end="<!-- docs:devtools:end -->" comments=false %}
-```
+=== "Maven (pom.xml)"
+    ```xml
+    {% include-markdown "../../code/02-dev-loop/maven/pom.xml" start="<!-- docs:devtools:start -->" end="<!-- docs:devtools:end -->" comments=false %}
+    ```
 
-DevTools is a local-development helper. Its most visible feature is automatic restart: when compiled classpath files change, DevTools restarts the application context for you. In practice, that means you edit a controller, recompile it, and watch the app restart without manually killing and rerunning the Maven command.
+=== "Gradle (build.gradle.kts)"
+    ```kotlin
+    {% include-markdown "../../code/02-dev-loop/gradle/build.gradle.kts" start="    compileOnly(\"org.springframework.boot:spring-boot-devtools\")" end="    compileOnly(\"org.springframework.boot:spring-boot-devtools\")" comments=false %}
+    ```
+
+DevTools is a local-development helper. Its most visible feature is automatic restart: when compiled classpath files change, DevTools restarts the application context for you. In practice, that means you edit a controller, recompile it, and watch the app restart without manually killing and rerunning the build commands.
 
 DevTools also starts an automatic LiveReload server. LiveReload is a tiny TCP server on port `35729`. If you install the LiveReload browser extension, the extension can connect to that server and refresh the browser when application resources change. It is most useful once you have templates, static files, or pages open in a browser.
 
 DevTools also applies sensible development defaults. A common example is disabling template caching so server-rendered pages are easier to iterate on. Production builds should keep production-oriented caching and startup behavior; DevTools is meant for the machine where you are actively editing code.
 
-The dependency has two important flags:
-
-```xml
-<scope>runtime</scope>
-<optional>true</optional>
-```
-
-`runtime` keeps DevTools out of compile-time application code. Your controllers and services should not call DevTools APIs.
-
-`optional=true` matters when another project depends on this application artifact. It tells Maven not to drag DevTools transitively into downstream consumers. That keeps a local convenience dependency from leaking into places where it does not belong, especially production packaging paths.
+In Maven, the dependency uses `<scope>runtime</scope>` and `<optional>true</optional>` flags to prevent it from leaking transitively or into production builds. In Gradle, configuring it via `compileOnly` or `developmentOnly` accomplishes the same isolation.
 
 !!! note "Development only"
     DevTools is for the local edit/run cycle. It is not an operations restart feature, and this chapter does not use an HTTP restart endpoint. Keep the mental model simple: edit code, compile code, let DevTools restart the local process.
 
 ## How restart is triggered
 
-DevTools watches the application classpath, not your editor buffer. Saving a Java file is only half of the story. The changed Java file must be compiled into `target/classes` before DevTools has something to restart from.
+DevTools watches the application classpath, not your editor buffer. Saving a Java file is only half of the story. The changed Java file must be compiled (into `target/classes` for Maven or `build/classes/java/main` for Gradle) before DevTools has something to restart from.
 
 In an IDE, the usual trigger is project compilation.
 
@@ -78,25 +75,53 @@ In IntelliJ IDEA, enable automatic builds for the project and use the IDE's auto
 
 In VS Code, the Spring Boot Dashboard provides a similar development mode for running Boot applications with restart and live-reload support. The important idea is the same: the editor or IDE has to compile the changed Java file while the app is still running.
 
-Terminal-only readers can use the Maven command directly:
+Terminal-only readers can use the build command directly:
 
-```bash
-cd code/02-dev-loop/maven
-./mvnw spring-boot:run
-```
+=== "Maven"
+    === "Maven"
+    ```bash
+    cd code/02-dev-loop/maven
+    ./mvnw spring-boot:run
+    ```
+
+=== "Gradle"
+    ```bash
+    cd code/02-dev-loop/gradle
+    ./gradlew bootRun
+    ```
+
+=== "Gradle"
+    ```bash
+    cd code/02-dev-loop/gradle
+    ./gradlew bootRun
+    ```
 
 Leave that terminal open. Edit a source file, save it, and let your build tool or IDE compile the change. When DevTools sees the classpath update, the log rolls through a restart.
 
-If you are using only a terminal and no background compiler, you may still need to stop and rerun `./mvnw spring-boot:run` after editing Java code. DevTools shortens the restart once class files change; it does not turn a plain text editor into a Java compiler.
+If you are using only a terminal and no background compiler, you may still need to stop and rerun the run command after editing Java code. DevTools shortens the restart once class files change; it does not turn a plain text editor into a Java compiler.
 
 ## Quick demo
 
 Start the app:
 
-```bash
-cd code/02-dev-loop/maven
-./mvnw spring-boot:run
-```
+=== "Maven"
+    === "Maven"
+    ```bash
+    cd code/02-dev-loop/maven
+    ./mvnw spring-boot:run
+    ```
+
+=== "Gradle"
+    ```bash
+    cd code/02-dev-loop/gradle
+    ./gradlew bootRun
+    ```
+
+=== "Gradle"
+    ```bash
+    cd code/02-dev-loop/gradle
+    ./gradlew bootRun
+    ```
 
 In another terminal, call the endpoint:
 
@@ -146,16 +171,42 @@ The test does not assert the exact timestamp. That would be brittle because `Ins
 
 From the project directory, run the full test suite:
 
-```bash
-cd code/02-dev-loop/maven
-./mvnw -q -B test
-```
+=== "Maven"
+    === "Maven"
+    ```bash
+    cd code/02-dev-loop/maven
+    ./mvnw test
+    ```
+
+=== "Gradle"
+    ```bash
+    cd code/02-dev-loop/gradle
+    ./gradlew test
+    ```
+
+=== "Gradle"
+    ```bash
+    cd code/02-dev-loop/gradle
+    ./gradlew test
+    ```
 
 Then start the application:
 
-```bash
-./mvnw spring-boot:run
-```
+=== "Maven"
+    === "Maven"
+    ```bash
+    ./mvnw spring-boot:run
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew bootRun
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew bootRun
+    ```
 
 Leave it running and call the endpoint from another terminal:
 

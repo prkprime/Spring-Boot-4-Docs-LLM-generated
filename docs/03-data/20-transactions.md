@@ -132,8 +132,14 @@ Open Session in View hides bad boundaries. When OSIV is enabled, Hibernate can k
 
 Run the chapter tests from the Maven project:
 
-```bash
-./mvnw -q -B test
-```
+=== "Maven"
+    ```bash
+    ./mvnw test
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew test
+    ```
 
 Chapter 21 moves from transaction boundaries to pagination and sorting: how to return a page of data, how to keep sort options explicit, and how to avoid expensive count queries when a screen only needs "load more" behavior.

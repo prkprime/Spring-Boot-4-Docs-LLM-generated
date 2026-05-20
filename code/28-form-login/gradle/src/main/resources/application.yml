@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: 28-form-login
+
+server:
+  servlet:
+    session:
+      timeout: 30m

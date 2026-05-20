@@ -90,22 +90,46 @@ recognizes that naming convention automatically.
 
 When no profile is active, the application uses the base values:
 
-```bash
-./mvnw spring-boot:run
-```
+=== "Maven"
+    === "Maven"
+    ```bash
+    ./mvnw spring-boot:run
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew bootRun
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew bootRun
+    ```
 
 When the `prod` profile is active, Spring Boot also loads
 `application-prod.yml`:
 
-```bash
-./mvnw spring-boot:run -Dspring-boot.run.arguments=--spring.profiles.active=prod
-```
+=== "Maven"
+    ```bash
+    ./mvnw spring-boot:run -Dspring-boot.run.arguments=--spring.profiles.active=prod
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew bootRun --args='--spring.profiles.active=prod'
+    ```
 
 If you run the jar directly, the same idea applies:
 
-```bash
-java -jar target/03-configuration-basics-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod
-```
+=== "Maven"
+    ```bash
+    java -jar target/03-configuration-basics-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod
+    ```
+
+=== "Gradle"
+    ```bash
+    java -jar build/libs/03-configuration-basics-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod
+    ```
 
 The profile is activated by the standard Spring Boot property
 `spring.profiles.active`. In this example, the value is `prod`.
@@ -265,9 +289,21 @@ properties support explicit.
 
 Start the application with the default profile:
 
-```bash
-./mvnw spring-boot:run
-```
+=== "Maven"
+    === "Maven"
+    ```bash
+    ./mvnw spring-boot:run
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew bootRun
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew bootRun
+    ```
 
 Then call the endpoint:
 
@@ -277,9 +313,15 @@ curl localhost:8080/greeting
 
 Now stop the app and start it with the `prod` profile:
 
-```bash
-./mvnw spring-boot:run -Dspring-boot.run.arguments=--spring.profiles.active=prod
-```
+=== "Maven"
+    ```bash
+    ./mvnw spring-boot:run -Dspring-boot.run.arguments=--spring.profiles.active=prod
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew bootRun --args='--spring.profiles.active=prod'
+    ```
 
 Call the same endpoint again:
 

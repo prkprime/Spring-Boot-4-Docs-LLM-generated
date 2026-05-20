@@ -1,7 +1,262 @@
-.md-nav--primary .md-nav__item--section > .md-nav > .md-nav__list {
-	padding-left: 0.75rem;
+/* Custom Premium Styling for Spring Boot 4 Docs */
+
+/* Typography & Variables Setup */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --md-text-font: 'Inter', -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+  --md-code-font: 'JetBrains Mono', monospace;
+
+  /* Theme colors - Light Mode (FastAPI/RustBook Teal Hybrid) */
+  --md-primary-fg-color:        #0d9488; /* Vibrant Teal */
+  --md-primary-fg-color--dark:  #0f766e;
+  --md-primary-bg-color:        #ffffff;
+  --md-accent-fg-color:         #0ea5e9; /* Sky Blue accent */
+  --md-default-fg-color:        #334155; /* Slate 700 */
+  --md-default-bg-color:        #f8fafc; /* Warm Slate 50 */
+  --md-code-bg-color:           #1e293b; /* Dark code blocks by default (premium contrast) */
+  --md-code-fg-color:           #f8fafc;
+  --md-typeset-color:           #1e293b; /* Slate 800 */
+  --md-typeset-a-color:         #0d9488;
+  
+  /* Layout tweaks */
+  --round-radius: 12px;
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.md-nav--primary .md-nav__item--section > .md-nav > .md-nav__list > .md-nav__item {
-	padding-left: 0.25rem;
+[data-md-color-scheme="slate"] {
+  /* Theme colors - Dark Mode (Rich Slate/Teal) */
+  --md-primary-fg-color:        #14b8a6; /* Teal 500 */
+  --md-primary-fg-color--dark:  #0d9488;
+  --md-accent-fg-color:         #38bdf8; /* Light Blue */
+  --md-default-fg-color:        #cbd5e1; /* Slate 300 */
+  --md-default-bg-color:        #0f172a; /* Slate 900 (Extremely premium deep blue-black) */
+  --md-code-bg-color:           #020617; /* Slate 950 */
+  --md-code-fg-color:           #f1f5f9;
+  --md-typeset-color:           #e2e8f0; /* Slate 200 */
+  --md-typeset-a-color:         #2dd4bf; /* Mint Teal */
+}
+
+/* Glassmorphism Header */
+.md-header {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background-color: rgba(13, 148, 136, 0.9) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+  transition: var(--transition-smooth);
+}
+
+[data-md-color-scheme="slate"] .md-header {
+  background-color: rgba(15, 23, 42, 0.8) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Navigation & Sidebar Enhancements (RustBook-like compactness and clarity) */
+.md-nav {
+  font-family: var(--md-text-font);
+}
+
+.md-nav__link {
+  font-weight: 500;
+  border-radius: 6px;
+  padding: 0.35rem 0.5rem !important;
+  transition: var(--transition-smooth);
+}
+
+.md-nav__link:hover {
+  background-color: rgba(20, 184, 166, 0.08);
+  color: var(--md-primary-fg-color) !important;
+}
+
+.md-nav__link--active {
+  color: var(--md-primary-fg-color) !important;
+  font-weight: 600;
+  background-color: rgba(20, 184, 166, 0.12);
+}
+
+.md-nav--primary .md-nav__item--section > .md-nav > .md-nav__list {
+  padding-left: 0.75rem;
+  border-left: 1.5px solid rgba(0, 0, 0, 0.06);
+}
+
+[data-md-color-scheme="slate"] .md-nav--primary .md-nav__item--section > .md-nav > .md-nav__list {
+  border-left: 1.5px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.3);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.5);
+}
+
+/* Content Area Styling */
+.md-content {
+  line-height: 1.65;
+  letter-spacing: -0.011em;
+}
+
+.md-typeset h1 {
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--md-typeset-color);
+}
+
+.md-typeset h2, .md-typeset h3, .md-typeset h4 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--md-typeset-color);
+}
+
+/* Link Styling */
+.md-typeset a {
+  text-decoration: none;
+  font-weight: 500;
+  border-bottom: 1px solid rgba(20, 184, 166, 0.2);
+  transition: var(--transition-smooth);
+}
+
+.md-typeset a:hover {
+  border-bottom-color: var(--md-primary-fg-color);
+  color: var(--md-primary-fg-color--dark);
+}
+
+/* Advanced Code Blocks (FastAPI / RustBook Style) */
+.md-typeset pre {
+  background-color: var(--md-code-bg-color) !important;
+  border-radius: var(--round-radius) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  padding: 1.25rem !important;
+  font-size: 0.85em !important;
+  margin: 1.5em 0 !important;
+  transition: var(--transition-smooth);
+}
+
+.md-typeset pre:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.md-typeset code {
+  font-family: var(--md-code-font) !important;
+  font-weight: 500 !important;
+}
+
+/* Inline Code Blocks */
+.md-typeset :not(pre) > code {
+  background-color: rgba(20, 184, 166, 0.08) !important;
+  color: var(--md-primary-fg-color) !important;
+  border: 1px solid rgba(20, 184, 166, 0.15);
+  padding: 0.15em 0.4em !important;
+  border-radius: 6px !important;
+  font-size: 0.85em !important;
+}
+
+[data-md-color-scheme="slate"] .md-typeset :not(pre) > code {
+  background-color: rgba(20, 184, 166, 0.15) !important;
+  color: #2dd4bf !important;
+  border: 1px solid rgba(20, 184, 166, 0.25);
+}
+
+/* Superfences / Tabs Parity Styling */
+.tabbed-set {
+  background-color: var(--md-code-bg-color);
+  border-radius: var(--round-radius);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  margin: 1.5em 0 !important;
+}
+
+.tabbed-labels {
+  border-bottom: 1.5px solid rgba(255, 255, 255, 0.1) !important;
+  padding: 0 0.5rem !important;
+  display: flex !important;
+  gap: 0.5rem;
+}
+
+.tabbed-labels label {
+  color: rgba(255, 255, 255, 0.6) !important;
+  font-weight: 600 !important;
+  font-size: 0.8em !important;
+  padding: 0.5rem 1rem !important;
+  border-bottom: 2px solid transparent !important;
+  cursor: pointer;
+  transition: var(--transition-smooth) !important;
+}
+
+.tabbed-labels label:hover {
+  color: #ffffff !important;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 6px 6px 0 0;
+}
+
+.tabbed-content .tabbed-block {
+  padding: 0 !important;
+}
+
+.tabbed-content .tabbed-block pre {
+  margin: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 0 var(--round-radius) var(--round-radius) !important;
+  background-color: transparent !important;
+}
+
+/* When a tab is checked, style the label */
+.tabbed-set input:nth-child(1):checked ~ .tabbed-labels label:nth-child(1),
+.tabbed-set input:nth-child(2):checked ~ .tabbed-labels label:nth-child(2),
+.tabbed-set input:nth-child(3):checked ~ .tabbed-labels label:nth-child(3) {
+  color: var(--md-primary-fg-color) !important;
+  border-bottom: 2px solid var(--md-primary-fg-color) !important;
+}
+
+/* Modern Admonitions */
+.md-typeset .admonition {
+  border-radius: var(--round-radius) !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03) !important;
+  border-left: 4px solid var(--md-primary-fg-color) !important;
+  margin: 1.5em 0 !important;
+  transition: var(--transition-smooth);
+}
+
+.md-typeset .admonition:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04) !important;
+  transform: translateY(-1px);
+}
+
+.md-typeset .admonition-title {
+  font-weight: 600 !important;
+  font-size: 0.9em !important;
+  padding: 0.75rem 1rem !important;
+  border-top-left-radius: var(--round-radius);
+  border-top-right-radius: var(--round-radius);
+}
+
+.md-typeset .admonition > :last-child {
+  padding: 1rem !important;
+}
+
+/* Special color overrides for different admonition types */
+.md-typeset .admonition.note {
+  border-left-color: var(--md-primary-fg-color) !important;
+  background-color: rgba(20, 184, 166, 0.03) !important;
+}
+.md-typeset .admonition.warning {
+  border-left-color: #f59e0b !important; /* Amber */
+  background-color: rgba(245, 158, 11, 0.03) !important;
+}
+.md-typeset .admonition.danger {
+  border-left-color: #ef4444 !important; /* Red */
+  background-color: rgba(239, 68, 68, 0.03) !important;
 }

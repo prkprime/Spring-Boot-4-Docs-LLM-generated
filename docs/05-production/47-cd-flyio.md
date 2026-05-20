@@ -92,9 +92,15 @@ Use platform secrets for values that must not be committed. The difference is no
 
 Before deploying, run tests:
 
-```bash
-./mvnw -q -B test
-```
+=== "Maven"
+    ```bash
+    ./mvnw test
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew test
+    ```
 
 The tests call the API and the readiness endpoint:
 

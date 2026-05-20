@@ -188,9 +188,15 @@ Notice what the test does not mock. It does not mock `JwtDecoder`, it does not u
 
 Run it from the chapter directory:
 
-```bash
-./mvnw -q -B test
-```
+=== "Maven"
+    ```bash
+    ./mvnw test
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew test
+    ```
 
 The first run may take a little while because Docker has to pull and start Keycloak. After that, the test still costs more than an MVC slice, but it exercises the provider boundary that tends to break in production.
 

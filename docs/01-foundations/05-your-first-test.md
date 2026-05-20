@@ -268,10 +268,24 @@ This guide uses `RestTestClient` instead. It is the modern Spring Framework 7 cl
 
 Run the tests from the chapter project:
 
-```bash
-cd code/05-your-first-test/maven
-./mvnw -q -B test
-```
+=== "Maven"
+    === "Maven"
+    ```bash
+    cd code/05-your-first-test/maven
+    ./mvnw test
+    ```
+
+=== "Gradle"
+    ```bash
+    cd code/05-your-first-test/gradle
+    ./gradlew test
+    ```
+
+=== "Gradle"
+    ```bash
+    cd code/05-your-first-test/gradle
+    ./gradlew test
+    ```
 
 A green run means all three layers agree:
 

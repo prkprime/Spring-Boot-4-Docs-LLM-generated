@@ -202,17 +202,29 @@ The assertion intentionally allows any non-2xx status. In production you should 
 
 Run the tests from the chapter project:
 
-```bash
-./mvnw -q -B test
-```
+=== "Maven"
+    ```bash
+    ./mvnw test
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew test
+    ```
 
 ## Run It
 
 Start the app:
 
-```bash
-./mvnw spring-boot:run
-```
+=== "Maven"
+    ```bash
+    ./mvnw spring-boot:run
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew bootRun
+    ```
 
 Upload a file and a text note:
 

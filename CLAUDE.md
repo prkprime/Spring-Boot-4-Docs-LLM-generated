@@ -9,9 +9,9 @@ Build and maintain a comprehensive Spring Boot 4 follow-along documentation site
 ## Current Shape
 
 - Docs live in `docs/` and are rendered by MkDocs Material.
-- Chapter code lives in `code/<chapter>/maven`.
+- Chapter code lives in `code/<chapter>/maven` (Maven) and `code/<chapter>/gradle` (Gradle).
 - Docs include code snippets from the chapter projects with `include-markdown`.
-- Gradle samples are currently absent because Initializr Gradle generation was failing upstream. Do not invent partial Gradle trees unless that issue is intentionally revisited.
+- Gradle environments are fully supported and automatically synchronized. Codebase-wide IntelliJ formatting rules (4-space tabs for Java/XML, 2-space tabs for YAML/Markdown) are enforced by Spotless.
 
 ## Hard Rules
 
@@ -21,6 +21,7 @@ Build and maintain a comprehensive Spring Boot 4 follow-along documentation site
 - Use `@MockitoBean` for Spring tests, not deprecated `@MockBean`.
 - Do not add blanket `hl_lines` or `linenums` attributes to code fences. MkDocs highlighting support is configured globally.
 - Keep source snippets runnable. If docs show code from `code/`, the referenced chapter should pass tests.
+- Code formatting follows IntelliJ IDEA defaults (4-space indent for Java/XML, 2-space for YAML/Markdown/JSON), enforced by the Spotless plugin (`spotless:apply` or `./gradlew spotlessApply`).
 - Do not commit build outputs, local environments, or caches.
 
 ## Verification Commands

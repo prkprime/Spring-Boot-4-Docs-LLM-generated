@@ -157,8 +157,14 @@ The MVC test focuses on argument binding:
 
 Run the chapter tests from the Maven project:
 
-```bash
-./mvnw -q -B test
-```
+=== "Maven"
+    ```bash
+    ./mvnw test
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew test
+    ```
 
 Chapter 22 builds on these repository ideas with specifications: composing dynamic filters without creating a new derived query method for every possible search form.

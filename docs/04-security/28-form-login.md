@@ -206,17 +206,29 @@ The logout test uses `formLogout()`, which builds a CSRF-protected `POST /logout
 
 Run the tests from the chapter project:
 
-```bash
-./mvnw -q -B test
-```
+=== "Maven"
+    ```bash
+    ./mvnw test
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew test
+    ```
 
 ## Run It
 
 Start the application:
 
-```bash
-./mvnw spring-boot:run
-```
+=== "Maven"
+    ```bash
+    ./mvnw spring-boot:run
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew bootRun
+    ```
 
 Open `http://localhost:8080/` in a browser. The home page is public. Follow the dashboard link and Spring Security redirects you to `/login`.
 

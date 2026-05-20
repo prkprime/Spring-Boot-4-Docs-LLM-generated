@@ -139,9 +139,15 @@ The audit and export tests show the older annotation styles. Carol's `AUDITOR` r
 
 Run the chapter tests from the code directory:
 
-```bash
-./mvnw -q -B test
-```
+=== "Maven"
+    ```bash
+    ./mvnw test
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew test
+    ```
 
 The assertions intentionally use `hasStatus(401)` and `hasStatus(403)` for numeric status checks. `MockMvcTester` does not provide `hasStatusUnauthorized()` or `hasStatusForbidden()` helpers.
 
@@ -149,9 +155,15 @@ The assertions intentionally use `hasStatus(401)` and `hasStatus(403)` for numer
 
 Start the sample:
 
-```bash
-./mvnw spring-boot:run
-```
+=== "Maven"
+    ```bash
+    ./mvnw spring-boot:run
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew bootRun
+    ```
 
 Then call the same endpoint with different users:
 

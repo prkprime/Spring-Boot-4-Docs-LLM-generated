@@ -156,9 +156,15 @@ Use both test shapes for different risks. The MVC test catches mistakes in your 
 
 Run the chapter tests from the Maven project:
 
-```bash
-./mvnw -q -B test
-```
+=== "Maven"
+    ```bash
+    ./mvnw test
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew test
+    ```
 
 ## Production Notes
 
@@ -176,9 +182,15 @@ Observability belongs here too. Outbound HTTP calls are often where latency and 
 
 Start the application:
 
-```bash
-./mvnw spring-boot:run
-```
+=== "Maven"
+    ```bash
+    ./mvnw spring-boot:run
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew bootRun
+    ```
 
 Call the local controller:
 

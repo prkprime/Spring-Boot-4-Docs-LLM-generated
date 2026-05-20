@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: 15-async-sse-virtual-threads
+  threads:
+    virtual:
+      enabled: true

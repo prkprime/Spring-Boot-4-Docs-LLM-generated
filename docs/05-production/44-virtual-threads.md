@@ -125,9 +125,15 @@ This combination proves the chapter's important behavior without asserting priva
 
 Run the chapter from the Maven directory:
 
-```bash
-./mvnw -q -B test
-```
+=== "Maven"
+    ```bash
+    ./mvnw test
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew test
+    ```
 
 ## ThreadLocal And Scoped Values
 

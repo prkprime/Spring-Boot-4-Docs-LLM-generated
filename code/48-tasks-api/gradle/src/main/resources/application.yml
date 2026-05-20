@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: 48-tasks-api
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/tasks}
+    username: ${DATABASE_USERNAME:tasks}
+    password: ${DATABASE_PASSWORD:tasks}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: ${JWT_JWK_SET_URI:http://localhost:9000/oauth2/jwks}
+
+server:
+  port: ${PORT:8080}
+  shutdown: graceful
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      probes:
+        enabled: true

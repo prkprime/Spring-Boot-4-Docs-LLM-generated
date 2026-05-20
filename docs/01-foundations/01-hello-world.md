@@ -12,116 +12,165 @@ You choose the project shape in the browser, click **Generate**, unzip the resul
 
 For this chapter, the project was generated with these choices:
 
-- **Project:** Maven
+- **Project:** Maven or Gradle - Kotlin
 - **Language:** Java
 - **Spring Boot:** 4.0.6
 - **Java:** 25
-- **Dependencies:** Web
+- **Dependencies:** Web (represented by `spring-boot-starter-webmvc` in Maven or Gradle)
 
-!!! note "Maven first"
-    This documentation currently scaffolds the Maven version only because the Gradle generator at `start.spring.io` is in an outage state. The Gradle version will be backfilled when the generator is usable again.
+!!! note "Dual-Build Support"
+    This guide provides full, first-class support for Maven and Gradle. Each chapter contains fully configured projects for both build systems.
 
-The generated project for this chapter lives here:
+The generated projects for this chapter live here:
 
-```text
-code/01-hello-world/maven/
-```
+=== "Maven"
+    ```text
+    code/01-hello-world/maven/
+    ```
+
+=== "Gradle"
+    ```text
+    code/01-hello-world/gradle/
+    ```
 
 ## What's in the box
 
-Initializr gives you a small but complete application. The important pieces are:
+Initializr gives you a small but complete application. The directory structures look like this:
 
-```text
-code/01-hello-world/maven/
-├── pom.xml
-├── mvnw
-├── src/main/java
-├── src/main/resources/application.properties
-└── src/test/java
-```
+=== "Maven Structure"
+    ```text
+    code/01-hello-world/maven/
+    ├── pom.xml
+    ├── mvnw
+    ├── src/main/java
+    ├── src/main/resources/application.properties
+    └── src/test/java
+    ```
 
-`pom.xml`
+=== "Gradle Structure"
+    ```text
+    code/01-hello-world/gradle/
+    ├── build.gradle.kts
+    ├── settings.gradle.kts
+    ├── gradlew
+    ├── src/main/java
+    ├── src/main/resources/application.properties
+    └── src/test/java
+    ```
 
-The Maven build file. It declares the Spring Boot version, the Java version, the web dependency, the test dependency, and the Spring Boot Maven plugin. Maven reads this file to know what to download and how to build the app.
+The important files are:
 
-`mvnw`
+`pom.xml` / `build.gradle.kts`
 
-The Maven Wrapper for macOS and Linux. It lets you run this project with `./mvnw` even if Maven is not installed globally. There is also an `mvnw.cmd` wrapper for Windows.
+The build files. They declare the Spring Boot version, Java version, dependencies (like `spring-boot-starter-webmvc` and test support), and build plugins. The build tool reads these to know what to download and how to build the app.
+
+`mvnw` / `gradlew`
+
+The wrapper scripts for macOS and Linux. They let you run this project with `./mvnw` or `./gradlew` even if you do not have Maven or Gradle installed globally. There are also `.cmd` wrappers for Windows.
 
 `src/main/java`
 
-The production Java source tree. This is where the application class and controller live. Maven compiles these files into the application you run.
+The production Java source tree. This is where the application classes and controllers live.
 
 `src/main/resources/application.properties`
 
-The default configuration file. It is empty in this chapter because we are using Spring Boot's defaults. Later chapters will put server, logging, and application settings here.
+The configuration file. It is empty in this chapter because we are using Spring Boot's defaults. Later chapters will configure server, logging, and application settings here.
 
 `src/test/java`
 
-The test Java source tree. This is where the web-layer test lives. Maven compiles and runs these tests when you execute `./mvnw test`.
+The test Java source tree. This is where the web-layer test lives. The build tool compiles and runs these tests during the test phase.
 
-## The pom.xml, line by line
+## The Build Configuration, line by line
 
-The `pom.xml` starts by saying this project inherits from Spring Boot's Maven parent:
+The build configuration starts by defining the build engine and its parent defaults:
 
-```xml
-{% include-markdown "../../code/01-hello-world/maven/pom.xml" start="<parent>" end="</parent>" comments=false %}
-```
+=== "Maven (pom.xml)"
+    ```xml
+    {% include-markdown "../../code/01-hello-world/maven/pom.xml" start="<parent>" end="</parent>" comments=false %}
+    ```
 
-`spring-boot-starter-parent` gives the project two big things.
+=== "Gradle (build.gradle.kts)"
+    ```kotlin
+    {% include-markdown "../../code/01-hello-world/gradle/build.gradle.kts" start="plugins {" end="}" comments=false %}
+    ```
 
-First, it imports Spring Boot's managed dependency versions. That means you usually do not write versions for Spring libraries yourself. Boot has already tested a compatible set.
-
-Second, it sets useful Maven plugin defaults. You can still override them, but the common Spring Boot build path works without much XML.
+In Maven, `spring-boot-starter-parent` gives the project managed dependency versions and plugin defaults. In Gradle, the `plugins` block imports the Spring Boot and Dependency Management plugins to do the same.
 
 !!! note "Version string"
-    The parent version in the finished project is `4.0.6`. Maven resolves that exact version from the repository. If a generated sample ever contains a suffix such as `.RELEASE`, replace it with the exact version used by the rest of this guide.
+    The parent version in the finished project is `4.0.6`. Maven and Gradle resolve that exact version from the repository.
 
 The project metadata comes next:
 
-```xml
-{% include-markdown "../../code/01-hello-world/maven/pom.xml" start="<groupId>dev.springboot4docs</groupId>" end="<licenses>" comments=false %}
-```
+=== "Maven (pom.xml)"
+    ```xml
+    {% include-markdown "../../code/01-hello-world/maven/pom.xml" start="<groupId>dev.springboot4docs</groupId>" end="<licenses>" comments=false %}
+    ```
 
-These values identify the application. They do not change the runtime behavior in this chapter. They matter more when you publish artifacts or organize several projects.
+=== "Gradle (build.gradle.kts)"
+    ```kotlin
+    {% include-markdown "../../code/01-hello-world/gradle/build.gradle.kts" start="group =" end="version =" comments=false %}
+    ```
 
-The Java version is declared as a Maven property:
+These values identify the application. They do not change the runtime behavior in this chapter, but identify the packages.
 
-```xml
-{% include-markdown "../../code/01-hello-world/maven/pom.xml" start="<properties>" end="</properties>" comments=false %}
-```
+The Java version is declared next:
 
-`<java.version>25</java.version>` tells Spring Boot's build setup to compile the application for Java 25. Use the same Java version in your terminal when you run the wrapper commands.
+=== "Maven (pom.xml)"
+    ```xml
+    {% include-markdown "../../code/01-hello-world/maven/pom.xml" start="<properties>" end="</properties>" comments=false %}
+    ```
+
+=== "Gradle (build.gradle.kts)"
+    ```kotlin
+    {% include-markdown "../../code/01-hello-world/gradle/build.gradle.kts" start="java {" end="}" comments=false %}
+    ```
+
+This configures the build setup to compile the application for Java 25.
 
 The web dependency is the first starter:
 
-```xml
-{% include-markdown "../../code/01-hello-world/maven/pom.xml" start="<artifactId>spring-boot-starter-webmvc</artifactId>" end="</dependency>" comments=false %}
-```
+=== "Maven (pom.xml)"
+    ```xml
+    {% include-markdown "../../code/01-hello-world/maven/pom.xml" start="<artifactId>spring-boot-starter-webmvc</artifactId>" end="</dependency>" comments=false %}
+    ```
 
-`spring-boot-starter-webmvc` brings in the servlet-based Spring MVC stack. It includes the pieces needed to receive HTTP requests, route them to controller methods, serialize responses, and run on an embedded servlet server.
+=== "Gradle (build.gradle.kts)"
+    ```kotlin
+    {% include-markdown "../../code/01-hello-world/gradle/build.gradle.kts" start="    implementation(\"org.springframework.boot:spring-boot-starter-webmvc\")" end="    implementation(\"org.springframework.boot:spring-boot-starter-webmvc\")" comments=false %}
+    ```
+
+`spring-boot-starter-webmvc` brings in the servlet-based Spring MVC stack. It includes the pieces needed to receive HTTP requests, route them to controller methods, serialize responses, and run on an embedded servlet server (Tomcat).
 
 !!! note "Spring Boot 4 only"
-    Spring Boot 4 split the old `spring-boot-starter-web` starter. Use `spring-boot-starter-webmvc` for servlet applications and `spring-boot-starter-webflux` for reactive applications. If you are porting from Spring Boot 3, this dependency name is one of the first changes you will notice.
+    Spring Boot 4 split the old `spring-boot-starter-web` starter. Use `spring-boot-starter-webmvc` for servlet applications and `spring-boot-starter-webflux` for reactive applications.
 
 The test dependency is also a starter:
 
-```xml
-{% include-markdown "../../code/01-hello-world/maven/pom.xml" start="<artifactId>spring-boot-starter-webmvc-test</artifactId>" end="</dependency>" comments=false %}
-```
+=== "Maven (pom.xml)"
+    ```xml
+    {% include-markdown "../../code/01-hello-world/maven/pom.xml" start="<artifactId>spring-boot-starter-webmvc-test</artifactId>" end="</dependency>" comments=false %}
+    ```
 
-`spring-boot-starter-webmvc-test` brings in the Spring MVC testing support used by this chapter. It is narrower than the old all-in-one test setup because Spring Boot 4 modularizes the test starters too.
+=== "Gradle (build.gradle.kts)"
+    ```kotlin
+    {% include-markdown "../../code/01-hello-world/gradle/build.gradle.kts" start="    testImplementation(\"org.springframework.boot:spring-boot-starter-webmvc-test\")" end="    testImplementation(\"org.springframework.boot:spring-boot-starter-webmvc-test\")" comments=false %}
+    ```
 
-!!! note "Spring Boot 4 only"
-    The web MVC test starter is new in the Spring Boot 4 line. For this guide, we use the MVC-specific test starter because our application is MVC-specific.
+`spring-boot-starter-webmvc-test` brings in the Spring MVC testing support used by this chapter. It is narrower than the old all-in-one test setup because Spring Boot 4 modularizes the test starters.
 
-At the bottom, the build uses the Spring Boot Maven plugin:
+At the bottom of the build configuration, we have the build tools and formatting configurations:
 
-```xml
-{% include-markdown "../../code/01-hello-world/maven/pom.xml" start="<build>" end="</build>" comments=false %}
-```
+=== "Maven (pom.xml)"
+    ```xml
+    {% include-markdown "../../code/01-hello-world/maven/pom.xml" start="<build>" end="</build>" comments=false %}
+    ```
 
-The `spring-boot-maven-plugin` adds Spring Boot goals to Maven. In this chapter we use `spring-boot:run`, which compiles the code and starts the application from the Maven project.
+=== "Gradle (build.gradle.kts)"
+    ```kotlin
+    {% include-markdown "../../code/01-hello-world/gradle/build.gradle.kts" start="spotless {" end="}" comments=false %}
+    ```
+
+The `spring-boot-maven-plugin` and standard Gradle tasks compile and run the application. We've also included the Spotless formatter plugin to automatically enforce style conventions.
 
 ## Application.java, line by line
 
@@ -214,10 +263,24 @@ Because the class is a `@RestController`, that string becomes the HTTP response 
 
 Start the app from the project directory:
 
-```bash
-cd code/01-hello-world/maven
-./mvnw spring-boot:run
-```
+=== "Maven"
+    === "Maven"
+    ```bash
+    cd code/01-hello-world/maven
+    ./mvnw spring-boot:run
+    ```
+
+=== "Gradle"
+    ```bash
+    cd code/01-hello-world/gradle
+    ./gradlew bootRun
+    ```
+
+=== "Gradle"
+    ```bash
+    cd code/01-hello-world/gradle
+    ./gradlew bootRun
+    ```
 
 Leave that terminal running. Spring Boot starts the embedded server on port `8080`.
 
@@ -288,20 +351,25 @@ This is not a browser test and it does not bind to port `8080`. It runs the cont
 
 ## Run the test
 
-From the Maven project directory, run:
+From the project directory, run:
 
-```bash
-./mvnw test
-```
+=== "Maven"
+    === "Maven"
+    ```bash
+    ./mvnw test
+    ```
 
-The end of the output should be green. The exact timing can differ, but the final lines should look like this:
+=== "Gradle"
+    ```bash
+    ./gradlew test
+    ```
 
-```text
-[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-```
+=== "Gradle"
+    ```bash
+    ./gradlew test
+    ```
+
+The end of the output should be green. For Maven, the build finishes with `BUILD SUCCESS`. For Gradle, it prints `BUILD SUCCESSFUL`.
 
 If the test passes, the controller contract is locked in: `GET /hello` returns `200 OK` and includes `Hello, Spring Boot 4!` in the response body.
 

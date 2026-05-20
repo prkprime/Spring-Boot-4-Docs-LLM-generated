@@ -162,9 +162,15 @@ Spring Boot's test-run support can also use this test configuration while you ma
 
 Run it from the Maven project:
 
-```bash
-./mvnw spring-boot:test-run
-```
+=== "Maven"
+    ```bash
+    ./mvnw spring-boot:test-run
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew bootTestRun
+    ```
 
 `SpringApplication.from(Application::main)` starts from the real application. `.with(TestcontainersConfiguration.class)` adds the test-only Postgres container. The result is a normal local application with a real disposable Postgres database behind it.
 
@@ -222,8 +228,14 @@ The payoff is confidence. You stop guessing whether H2 behaved like Postgres. Yo
 
 Run the chapter from the Maven directory:
 
-```bash
-./mvnw -q -B test
-```
+=== "Maven"
+    ```bash
+    ./mvnw test
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew test
+    ```
 
 Chapter 44 continues from this production-testing foundation and moves into the next operational concern.

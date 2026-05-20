@@ -38,6 +38,7 @@ PROSE_LEAK_RE = re.compile(
     r"@SpringBootApplication\b)",
     re.DOTALL,
 )
+LINK_RE = re.compile(r'!?\[[^\]]*\]\(([^)]+)\)')
 
 
 def page_pairs_build():
@@ -89,6 +90,16 @@ def check(md, html):
     if leak:
         snippet = leak.group(0)[-160:]
         failures.append(f"Java source leaked into prose: ...{snippet!r}")
+    
+    # Check relative links
+    for link in LINK_RE.findall(src):
+        clean_link = link.split("#")[0]
+        if not clean_link or clean_link.startswith(("http:", "https:", "mailto:", "ftp:", "javascript:")):
+            continue
+        target_path = (md.parent / clean_link).resolve()
+        if not target_path.exists():
+            failures.append(f"broken relative link '{link}'")
+            
     return failures
 
 

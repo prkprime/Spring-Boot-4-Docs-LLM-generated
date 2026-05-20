@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: 36-ldap
+  ldap:
+    embedded:
+      port: 8389
+      ldif: classpath:test-server.ldif
+      base-dn: dc=springboot4docs,dc=dev
+    urls: ldap://localhost:8389

@@ -137,9 +137,15 @@ This is a focused test. It does not capture logs, sleep to make elapsed time non
 
 Run the chapter tests from the Maven project:
 
-```bash
-./mvnw -q -B test
-```
+=== "Maven"
+    ```bash
+    ./mvnw test
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew test
+    ```
 
 ## Choosing One
 
@@ -153,9 +159,15 @@ There is overlap. You can log timing in a filter, and you can add headers in an 
 
 Start the application:
 
-```bash
-./mvnw spring-boot:run
-```
+=== "Maven"
+    ```bash
+    ./mvnw spring-boot:run
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew bootRun
+    ```
 
 Call the endpoint:
 

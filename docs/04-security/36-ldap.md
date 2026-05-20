@@ -171,9 +171,15 @@ The admin tests prove authorization, not just authentication. Alice is a member 
 
 Run the chapter from its Maven directory:
 
-```bash
-./mvnw -q -B test
-```
+=== "Maven"
+    ```bash
+    ./mvnw test
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew test
+    ```
 
 That command should start the embedded LDAP server, load the LDIF, authenticate Alice and Bob through LDAP, and verify the admin group mapping.
 

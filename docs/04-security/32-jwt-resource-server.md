@@ -160,9 +160,15 @@ The assertions use `.hasStatus(401)`, `.hasStatus(403)`, and `.hasStatus(200)` f
 
 Run the chapter tests from the code directory:
 
-```bash
-./mvnw -q -B test
-```
+=== "Maven"
+    ```bash
+    ./mvnw test
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew test
+    ```
 
 ## Production Notes
 

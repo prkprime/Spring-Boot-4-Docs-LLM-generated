@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: 11-http-service-clients
+  http:
+    client:
+      service:
+        dev.springboot4docs.ch_11_http_service_clients.GitHubClient:
+          base-url: https://api.github.com
+  threads:
+    virtual:
+      enabled: true

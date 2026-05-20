@@ -185,9 +185,15 @@ The combination is useful. One test checks the controller with an already-authen
 
 Run the tests from the chapter project:
 
-```bash
-./mvnw -q -B test
-```
+=== "Maven"
+    ```bash
+    ./mvnw test
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew test
+    ```
 
 ## Common Footguns
 

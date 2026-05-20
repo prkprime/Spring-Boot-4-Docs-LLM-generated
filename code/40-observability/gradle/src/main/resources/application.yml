@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: 40-observability
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  metrics:
+    tags:
+      application: ${spring.application.name}
+  observations:
+    enable:
+      spring.security: false
+  tracing:
+    sampling:
+      probability: 1.0
+  otlp:
+    tracing:
+      endpoint: ${OTLP_TRACES_ENDPOINT:http://localhost:4318/v1/traces}
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"

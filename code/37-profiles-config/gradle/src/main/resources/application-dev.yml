@@ -1,0 +1,8 @@
+app:
+  greeting: Hello from the dev profile
+
+logging:
+  level:
+    root: INFO
+    dev.springboot4docs.ch_37_profiles_config: DEBUG
+    org.springframework.boot.context.config: DEBUG

@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: 17-jpa-basics
+  datasource:
+    url: jdbc:h2:mem:authors
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate.format_sql: true

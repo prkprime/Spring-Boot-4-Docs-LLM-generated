@@ -156,9 +156,15 @@ Notice what the tests do not do: they do not simulate a JavaScript runtime. The 
 
 Run the chapter tests from the Maven project:
 
-```bash
-./mvnw -q -B test
-```
+=== "Maven"
+    ```bash
+    ./mvnw test
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew test
+    ```
 
 ## Common Bugs
 
@@ -174,9 +180,15 @@ Private Network Access, sometimes discussed as CORS-RFC1918, adds more browser c
 
 Start the app:
 
-```bash
-./mvnw spring-boot:run
-```
+=== "Maven"
+    ```bash
+    ./mvnw spring-boot:run
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew bootRun
+    ```
 
 Send a preflight request by hand:
 

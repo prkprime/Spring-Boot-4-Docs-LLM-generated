@@ -126,9 +126,15 @@ The tests prove the two things the image will rely on: the API endpoint and the 
 
 Run the chapter from the Maven directory:
 
-```bash
-./mvnw -q -B test
-```
+=== "Maven"
+    ```bash
+    ./mvnw test
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew test
+    ```
 
 ## Buildpacks Alternative
 

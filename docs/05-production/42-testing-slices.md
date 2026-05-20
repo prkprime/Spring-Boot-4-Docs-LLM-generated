@@ -197,8 +197,14 @@ For business logic, prefer a unit test first. Add a slice only when the framewor
 
 Run this chapter from the Maven directory:
 
-```bash
-./mvnw -q -B test
-```
+=== "Maven"
+    ```bash
+    ./mvnw test
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew test
+    ```
 
 Chapter 43 keeps the pyramid idea but swaps H2 for real infrastructure with Testcontainers.

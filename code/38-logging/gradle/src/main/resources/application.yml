@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: 38-logging
+
+logging:
+  structured:
+    format:
+      console: ecs
+  level:
+    root: INFO
+    dev.springboot4docs: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,loggers

@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: 35-oauth2-keycloak
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${ISSUER_URI:http://localhost:8080/realms/sb4-docs}

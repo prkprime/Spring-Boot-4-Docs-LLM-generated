@@ -102,9 +102,15 @@ The controller is intentionally thin:
 
 Start the app from the chapter directory:
 
-```bash
-./mvnw spring-boot:run
-```
+=== "Maven"
+    ```bash
+    ./mvnw spring-boot:run
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew bootRun
+    ```
 
 Then call the endpoint:
 
@@ -146,9 +152,15 @@ The important Spring Boot 4 imports are visible here: `@WebMvcTest` comes from `
 
 Run the chapter tests from the Maven project:
 
-```bash
-./mvnw -q -B test
-```
+=== "Maven"
+    ```bash
+    ./mvnw test
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew test
+    ```
 
 ## Footguns
 

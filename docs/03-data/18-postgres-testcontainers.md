@@ -192,9 +192,15 @@ docker run --name sb4docs-postgres --rm \
 
 Then run the app:
 
-```bash
-./mvnw spring-boot:run
-```
+=== "Maven"
+    ```bash
+    ./mvnw spring-boot:run
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew bootRun
+    ```
 
 Flyway runs on startup in this mode too. If the database is empty, `V1__create_author.sql` creates the table and `V2__seed_authors.sql` inserts the sample authors. If the database already has those migrations recorded in `flyway_schema_history`, Flyway leaves them alone. That is the same lifecycle you use in tests, just pointed at your local database.
 
@@ -206,9 +212,15 @@ The test source also includes a `TestApplication`:
 
 That class starts the real application and imports the Testcontainers configuration. It is handy when you want a disposable Postgres without running Docker commands yourself:
 
-```bash
-./mvnw spring-boot:test-run
-```
+=== "Maven"
+    ```bash
+    ./mvnw spring-boot:test-run
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew bootTestRun
+    ```
 
 With the app running, try the API:
 
@@ -228,9 +240,15 @@ The point is not that every test must be slow or broad. You can still write narr
 
 Run the chapter tests from the Maven project:
 
-```bash
-./mvnw -q -B test
-```
+=== "Maven"
+    ```bash
+    ./mvnw test
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew test
+    ```
 
 On the first run, Docker may need to pull `postgres:16-alpine`, so expect the build to take longer than an ordinary unit-test run. After the image is cached, startup is usually much faster.
 

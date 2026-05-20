@@ -77,9 +77,15 @@ The sample user is shared by the three configurations:
 
 Run the app with the default profile by not selecting any profile:
 
-```bash
-./mvnw spring-boot:run
-```
+=== "Maven"
+    ```bash
+    ./mvnw spring-boot:run
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew bootRun
+    ```
 
 In a real server-rendered form, the view template would include the CSRF parameter name and token as a hidden input. Spring MVC view technologies and Spring Security integrations can do that for you, but the underlying rule is the same as the test: a protected write needs the token.
 
@@ -161,9 +167,15 @@ The test calls `GET /csrf`, reads the returned token, keeps the `XSRF-TOKEN` coo
 
 Run the chapter tests from the code directory:
 
-```bash
-./mvnw -q -B test
-```
+=== "Maven"
+    ```bash
+    ./mvnw test
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew test
+    ```
 
 The assertions use `.hasStatus(403)` for forbidden responses. `MockMvcTester` has convenient helpers such as `.hasStatusOk()`, but not a `.hasStatusForbidden()` shortcut.
 

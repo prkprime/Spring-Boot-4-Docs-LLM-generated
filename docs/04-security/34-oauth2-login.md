@@ -284,9 +284,15 @@ That creates an `OidcUser`, including ID token claims, so the test can verify th
 
 Run the chapter tests from the code directory:
 
-```bash
-./mvnw -q -B test
-```
+=== "Maven"
+    ```bash
+    ./mvnw test
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew test
+    ```
 
 ## Production Notes
 

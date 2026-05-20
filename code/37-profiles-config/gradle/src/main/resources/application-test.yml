@@ -1,0 +1,6 @@
+app:
+  name: Profiles Config Test App
+  greeting: Hello from tests
+  version: test
+  secret-api-key: test-key
+  database-url: jdbc:h2:mem:profiles-config-test

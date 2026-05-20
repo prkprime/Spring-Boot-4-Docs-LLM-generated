@@ -121,9 +121,15 @@ The test clears Redis before each method and resets the fake client counter. Tha
 
 Run the tests from the chapter project:
 
-```bash
-./mvnw -q -B test
-```
+=== "Maven"
+    ```bash
+    ./mvnw test
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew test
+    ```
 
 The first run may pull the `redis:7-alpine` image. After that, Testcontainers starts a fresh Redis for the test context and Spring Boot wires it into the application automatically.
 

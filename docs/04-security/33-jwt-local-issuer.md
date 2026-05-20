@@ -90,10 +90,17 @@ Three test methods exercise the flow:
 
 ## Run it
 
-```bash
-cd code/33-jwt-local-issuer/maven
-./mvnw spring-boot:run
-```
+=== "Maven"
+    ```bash
+    cd code/33-jwt-local-issuer/maven
+    ./mvnw spring-boot:run
+    ```
+
+=== "Gradle"
+    ```bash
+    cd code/33-jwt-local-issuer/gradle
+    ./gradlew bootRun
+    ```
 
 In another terminal:
 

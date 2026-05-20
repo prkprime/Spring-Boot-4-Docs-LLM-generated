@@ -121,9 +121,15 @@ The tests prove four production behaviors:
 
 Run the chapter:
 
-```bash
-./mvnw -q -B test
-```
+=== "Maven"
+    ```bash
+    ./mvnw test
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew test
+    ```
 
 For local manual testing with disposable Postgres:
 
@@ -133,9 +139,15 @@ For local manual testing with disposable Postgres:
 
 Start it with:
 
-```bash
-./mvnw spring-boot:test-run
-```
+=== "Maven"
+    ```bash
+    ./mvnw spring-boot:test-run
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew bootTestRun
+    ```
 
 The test runner gives you Postgres, but it does not give you a real JWT issuer. For manual API calls, either run a real issuer and set `JWT_JWK_SET_URI`, or temporarily add a local development decoder. Do not ship a fake decoder in production code.
 

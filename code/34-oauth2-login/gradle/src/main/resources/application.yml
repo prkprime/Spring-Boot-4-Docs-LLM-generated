@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: 34-oauth2-login
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: ${GITHUB_CLIENT_ID:demo-client-id}
+            client-secret: ${GITHUB_CLIENT_SECRET:demo-client-secret}
+          google:
+            client-id: ${GOOGLE_CLIENT_ID:demo-client-id}
+            client-secret: ${GOOGLE_CLIENT_SECRET:demo-client-secret}
+            scope: openid,profile,email

@@ -263,9 +263,15 @@ The application has a tiny read API:
 
 Start the app:
 
-```bash
-./mvnw spring-boot:run
-```
+=== "Maven"
+    ```bash
+    ./mvnw spring-boot:run
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew bootRun
+    ```
 
 Then compare the SQL logs for these endpoints:
 
@@ -288,8 +294,14 @@ Small seed data is enough because the query pattern is what matters. Three autho
 
 Run the tests from the chapter project:
 
-```bash
-./mvnw -q -B test
-```
+=== "Maven"
+    ```bash
+    ./mvnw test
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew test
+    ```
 
 Chapter 20 moves from query shape to transaction boundaries: where transactions begin, what `readOnly` really means, when changes flush, and how rollback behavior affects service design.

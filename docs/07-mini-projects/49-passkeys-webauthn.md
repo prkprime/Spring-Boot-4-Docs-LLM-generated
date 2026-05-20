@@ -118,9 +118,15 @@ The tests prove the server behavior that must be stable before adding a browser 
 
 Run it:
 
-```bash
-./mvnw -q -B test
-```
+=== "Maven"
+    ```bash
+    ./mvnw test
+    ```
+
+=== "Gradle"
+    ```bash
+    ./gradlew test
+    ```
 
 ## Recovery
 

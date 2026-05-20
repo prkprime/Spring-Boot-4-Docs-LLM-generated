@@ -52,15 +52,27 @@ scaffold "maven-project" "maven"
 sed -i "s|<version>${SB_VERSION}.RELEASE</version>|<version>${SB_VERSION}</version>|" \
   "${OUT}/maven/pom.xml"
 
-# Gradle scaffolding is disabled because start.spring.io currently returns
-# HTTP 500 for all Gradle project types (upstream Initializr bug observed
-# 2026-05-09). When that is resolved, set SB4_INIT_GRADLE=1 to opt back in
-# and we'll regenerate gradle/ for every existing chapter.
-if [[ "${SB4_INIT_GRADLE:-0}" == "1" ]]; then
-  scaffold "gradle-project-kotlin" "gradle"
+# Inject Spotless plugin into the Maven pom.xml
+python3 -c "import sys; sys.path.append('${ROOT}/scripts'); from inject_tooling import clean_and_inject_pom; from pathlib import Path; clean_and_inject_pom(Path('${OUT}/maven/pom.xml'))"
+
+# Offline Gradle scaffolding
+GRADLE_DIR="${OUT}/gradle"
+echo "→ scaffolding gradle from local offline template..."
+mkdir -p "${GRADLE_DIR}"
+cp -r "${ROOT}/scripts/gradle-wrapper-template/gradle" "${GRADLE_DIR}/"
+cp "${ROOT}/scripts/gradle-wrapper-template/gradlew" "${GRADLE_DIR}/"
+cp "${ROOT}/scripts/gradle-wrapper-template/gradlew.bat" "${GRADLE_DIR}/"
+chmod +x "${GRADLE_DIR}/gradlew"
+
+# Copy source from maven
+if [[ -d "${OUT}/maven/src" ]]; then
+  cp -r "${OUT}/maven/src" "${GRADLE_DIR}/"
 fi
+
+# Run POM to Gradle translation
+python3 "${ROOT}/scripts/pom_to_gradle.py" "${OUT}/maven/pom.xml" "${GRADLE_DIR}"
 
 echo
 echo "✓ scaffolded ${OUT}/maven"
-[[ -d "${OUT}/gradle" ]] && echo "  + ${OUT}/gradle"
+echo "✓ scaffolded ${OUT}/gradle"
 echo "  next: scripts/verify-chapter.sh ${SLUG}"
